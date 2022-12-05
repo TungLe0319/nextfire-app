@@ -73,7 +73,7 @@ function UsernameForm() {
     debounce(async (username) => {
       if (username.length >= 3) {
         const ref = firestore.doc(`usernames/${username}`);
-        const  exists  = await ref.get();
+        const { exists } = await ref.get();
         console.log("Firestore read executed");
         setIsValid(!exists);
         setLoading(false);
@@ -82,21 +82,23 @@ function UsernameForm() {
     []
   );
 
-
-
-  const onSubmit = async ( e) => {
-    e.preventDefault()
+  const onSubmit = async (e) => {
+    e.preventDefault();
     // @ts-ignore
-    const userDoc = firestore.doc(`users/${user.uid}`)
+    const userDoc = firestore.doc(`users/${user.uid}`);
     // @ts-ignore
-    const usernameDoc = firestore.doc(`username/${formValue}`)
-    const batch = firestore.batch()
+    const usernameDoc = firestore.doc(`username/${formValue}`);
+    const batch = firestore.batch();
     // @ts-ignore
-    batch.set(userDoc,{username:formValue,photoURL:user.photoURL, displayName:user.displayName})
-// @ts-ignore
-batch.set(usernameDoc,{uid: user.uid})
-await batch.commit()
-  }
+    batch.set(userDoc, {
+      username: formValue,
+      photoURL: user.photoURL,
+      displayName: user.displayName,
+    });
+    // @ts-ignore
+    batch.set(usernameDoc, { uid: user.uid });
+    await batch.commit();
+  };
 
   return (
     !username && (
@@ -109,7 +111,11 @@ await batch.commit()
             value={formValue}
             onChange={onChange}
           />
-          <UsernameMessage username={formValue}  isValid={isValid} loading={loading} />
+          <UsernameMessage
+            username={formValue}
+            isValid={isValid}
+            loading={loading}
+          />
           <button type="submit" className="btn-green" disabled={!isValid}>
             Choose
           </button>
@@ -127,8 +133,6 @@ await batch.commit()
     )
   );
 }
-
-
 
 // @ts-ignore
 function UsernameMessage({ username, isValid, loading }) {
