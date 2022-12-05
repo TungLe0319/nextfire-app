@@ -4,6 +4,7 @@ import { UserContext } from "../lib/context.js";
 import { auth, firestore, googleAuthProvider } from "../lib/firebase.js";
 
 // @ts-ignore
+// @ts-ignore
 export default function EnterPage(props) {
   const { user, username } = useContext(UserContext);
   //1. user signed Out <SignInButton/>
@@ -92,7 +93,9 @@ function UsernameForm() {
     // @ts-ignore
     batch.set(userDoc, {
       username: formValue,
+      // @ts-ignore
       photoURL: user.photoURL,
+      // @ts-ignore
       displayName: user.displayName,
     });
     // @ts-ignore
