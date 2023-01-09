@@ -1,7 +1,7 @@
-import styles from "../../styles/Admin.module.css";
-import AuthCheck from "../../components/AuthCheck";
-import { firestore, auth, serverTimestamp } from "../../lib/firebase";
-import ImageUploader from "../../components/ImageUploader";
+import styles from "@styles/Admin.module.css";
+import AuthCheck from "@components/AuthCheck";
+import { firestore, auth, serverTimestamp } from "@lib/firebase";
+import ImageUploader from "@components/ImageUploader";
 
 import { useState } from "react";
 import { useRouter } from "next/router";
@@ -11,7 +11,6 @@ import { useForm } from "react-hook-form";
 import ReactMarkdown from "react-markdown";
 import Link from "next/link";
 import toast from "react-hot-toast";
-import React from "react";
 
 export default function AdminPostEdit(props) {
   return (
@@ -66,14 +65,7 @@ function PostManager() {
 }
 
 function PostForm({ defaultValues, postRef, preview }) {
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-    formState,
-    reset,
-    watch,
-  } = useForm({
+  const { register, errors, handleSubmit, formState, reset, watch } = useForm({
     defaultValues,
     mode: "onChange",
   });
@@ -105,19 +97,23 @@ function PostForm({ defaultValues, postRef, preview }) {
 
         <textarea
           name="content"
-        
+          ref={register({
+            maxLength: { value: 20000, message: "content is too long" },
+            minLength: { value: 10, message: "content is too short" },
+            required: { value: true, message: "content is required" },
+          })}
         ></textarea>
 
-        {/* {errors.content && (
+        {errors.content && (
           <p className="text-danger">{errors.content.message}</p>
-        )} */}
+        )}
 
         <fieldset>
           <input
             className={styles.checkbox}
             name="published"
             type="checkbox"
-            {...register}
+            ref={register}
           />
           <label>Published</label>
         </fieldset>
