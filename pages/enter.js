@@ -34,9 +34,9 @@ function SignInButton() {
 
   return (
     <div className="  flex justify-center ounded  p-5  mt-72">
-      <img
-        src="public\google.png"
-        alt=""
+      <Image
+        src="https://cdn-icons-png.flaticon.com/512/300/300221.png"
+        alt="Google Icon"
         height={100}
         width={100}
         className="shadow-xl rounded-full"
