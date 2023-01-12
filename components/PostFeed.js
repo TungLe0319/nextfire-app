@@ -16,9 +16,9 @@ function PostItem({ post, admin = false }) {
 
   return (
     <div className=" p-5 rounded-md  my-3 bg-white hover:bg-indigo-200 shadow-lg-md hover:shadow-lg transition-all hover:transition-all">
-      <Link href={`/${post.username}`}>
+      {/* <Link href={`/${post.username}`}>
         <img src={post.photo} alt="" /> <strong> @{post.username}</strong>
-      </Link>
+      </Link> */}
 
       <div className=" my-4">
         <Link href={`/${post.username}/${post.slug}`}>

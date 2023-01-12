@@ -50,7 +50,7 @@ export default function Navbar() {
                 className="flex align-middle  text-center"
               >
                 <div className="">
-                  <img
+                  {/* <img
                     src={
                       // @ts-ignore
                       user?.photoURL
@@ -59,7 +59,7 @@ export default function Navbar() {
                     width="80"
                     height="80"
                     onError={handleImageError}
-                  />
+                  /> */}
                 </div>
                 <p className="mb-0 mt-3 ml-2">@{user?.displayName}</p>
               </Link>
