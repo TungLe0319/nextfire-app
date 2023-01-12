@@ -6,6 +6,7 @@ import Image from "next/image.js";
 import '@styles/Admin.module.css'
 // @ts-ignore
 // @ts-ignore
+//testing
 export default function EnterPage(props) {
   const { user, username } = useContext(UserContext);
   //1. user signed Out <SignInButton/>
