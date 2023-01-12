@@ -35,7 +35,7 @@ function SignInButton() {
   return (
     <div className="  flex justify-center ounded  p-5  mt-72">
       <Image
-        src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png"
+        src="public\google.png"
         alt=""
         height={100}
         width={100}
