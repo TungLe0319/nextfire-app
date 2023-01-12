@@ -56,9 +56,9 @@ function UsernameForm() {
   const [isValid, setIsValid] = useState(false);
   const [loading, setLoading] = useState(false);
   const { user, username } = useContext(UserContext);
-  useEffect(() => {
-    checkUsername(formValue);
-  }, [formValue]);
+  // useEffect(() => {
+  //   checkUsername(formValue);
+  // }, [formValue]);
 
   const onChange = (e) => {
     // Force form value typed in form to match correct format
@@ -79,18 +79,18 @@ function UsernameForm() {
     }
   };
 
-  const checkUsername = useCallback(
-    debounce(async (username) => {
-      if (username.length >= 3) {
-        const ref = firestore.doc(`usernames/${username}`);
-        const { exists } = await ref.get();
-        console.log("Firestore read executed");
-        setIsValid(!exists);
-        setLoading(false);
-      }
-    }, 500),
-    []
-  );
+  // const checkUsername = useCallback(
+  //   debounce(async (username) => {
+  //     if (username.length >= 3) {
+  //       const ref = firestore.doc(`usernames/${username}`);
+  //       const { exists } = await ref.get();
+  //       console.log("Firestore read executed");
+  //       setIsValid(!exists);
+  //       setLoading(false);
+  //     }
+  //   }, 500),
+  //   []
+  // );
 
   const onSubmit = async (e) => {
     e.preventDefault();
