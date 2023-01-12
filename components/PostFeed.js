@@ -11,25 +11,22 @@ export default function PostFeed({ posts, admin }) {
 
 function PostItem({ post, admin = false }) {
   // Naive method to calc word count and read time
-  const wordCount = post?.content.trim().split(/\s+/g).length;
+  const wordCount = post?.content?.trim().split(/\s+/g).length;
   const minutesToRead = (wordCount / 100 + 1).toFixed(0);
 
   return (
-    <div className="card">
+    <div className=" p-5 rounded-md  my-3 bg-white hover:bg-indigo-200 shadow-lg-md hover:shadow-lg transition-all hover:transition-all">
       <Link href={`/${post.username}`}>
-      
-          <strong>By @{post.username}</strong>
-       
+        <img src={post.photo} alt="" /> <strong> @{post.username}</strong>
       </Link>
 
-      <Link href={`/${post.username}/${post.slug}`}>
-        <h2>
-          {post.title}
-        </h2>
-      </Link>
-
-      <footer>
-        <span>
+      <div className=" my-4">
+        <Link href={`/${post.username}/${post.slug}`}>
+          <h2>{post.title}</h2>
+        </Link>
+      </div>
+      <footer className="flex">
+        <span className="   text-sm">
           {wordCount} words. {minutesToRead} min read
         </span>
         <span className="push-left">💗 {post.heartCount || 0} Hearts</span>

@@ -1,6 +1,6 @@
-import PostFeed from "../components/PostFeed";
-import Metatags from "../components/Metatags";
-import Loader from "../components/Loader";
+import PostFeed from "@components/PostFeed";
+import Metatags from "@components/Metatags";
+import Loader from "@components/Loader";
 import { firestore, fromMillis, postToJSON } from "../lib/firebase.js";
 
 import { useState } from "react";
@@ -63,7 +63,7 @@ export default function Home(props) {
         description="Get the latest posts on our site"
       />
 
-      <div className="card card-info">
+      <div className="card   card-info">
         <h2>💡 Next.js + Firebase - The Full Course</h2>
         <p>
           Welcome! This app is built with Next.js and Firebase and is loosely
@@ -73,10 +73,16 @@ export default function Home(props) {
           Sign up for an 👨‍🎤 account, ✍️ write posts, then 💞 heart content
           created by other users. All public content is server-rendered and
           search-engine optimized.
+          <br />
+          <b>
+          
+            I did this following fireship.io's instructional video until
+            completion and then put my own flare on this project.
+          </b>
         </p>
       </div>
 
-      <PostFeed posts={posts} admin={false}  />
+      <PostFeed posts={posts} admin={false} />
 
       {!loading && !postsEnd && (
         <button onClick={getMorePosts}>Load more</button>

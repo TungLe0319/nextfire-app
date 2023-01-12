@@ -1,7 +1,7 @@
-import styles from "../../styles/Admin.module.css";
-import AuthCheck from "../../components/AuthCheck";
-import { firestore, auth, serverTimestamp } from "../../lib/firebase";
-import ImageUploader from "../../components/ImageUploader";
+import styles from "@styles/Admin.module.css";
+import AuthCheck from "@components/AuthCheck";
+import { firestore, auth, serverTimestamp } from "@lib/firebase";
+import ImageUploader from "@components/ImageUploader";
 
 import { useState } from "react";
 import { useRouter } from "next/router";
@@ -11,7 +11,6 @@ import { useForm } from "react-hook-form";
 import ReactMarkdown from "react-markdown";
 import Link from "next/link";
 import toast from "react-hot-toast";
-import React from "react";
 
 export default function AdminPostEdit(props) {
   return (
@@ -32,10 +31,13 @@ function PostManager() {
     .doc(auth.currentUser.uid)
     .collection("posts")
     .doc(slug);
-  const [post] = useDocumentDataOnce(postRef);
+
+    const [post] = useDocumentDataOnce(postRef);
+
 
   return (
     <main className={styles.container}>
+    
       {post && (
         <>
           <section>
@@ -66,19 +68,12 @@ function PostManager() {
 }
 
 function PostForm({ defaultValues, postRef, preview }) {
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-    formState,
-    reset,
-    watch,
-  } = useForm({
+  const { register, handleSubmit, formState:{errors}, reset, watch } = useForm({
     defaultValues,
     mode: "onChange",
   });
 
-  const { isValid, isDirty } = formState;
+  // const { isValid, isDirty } = formState;
 
   const updatePost = async ({ content, published }) => {
     await postRef.update({
@@ -104,13 +99,18 @@ function PostForm({ defaultValues, postRef, preview }) {
         <ImageUploader />
 
         <textarea
+          className=" shadow-lg rounded-md "
           name="content"
-        
+          {...register("content", {
+            required: true,
+            maxLength: 20000,
+            minLength: 10,
+          })}
         ></textarea>
 
-        {/* {errors.content && (
+        {errors.content && (
           <p className="text-danger">{errors.content.message}</p>
-        )} */}
+        )}
 
         <fieldset>
           <input
@@ -125,7 +125,7 @@ function PostForm({ defaultValues, postRef, preview }) {
         <button
           type="submit"
           className="btn-green"
-          disabled={!isDirty || !isValid}
+          // disabled={!isDirty || !isValid}
         >
           Save Changes
         </button>
