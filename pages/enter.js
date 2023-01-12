@@ -35,7 +35,7 @@ function SignInButton() {
   return (
     <div className="  flex justify-center ounded  p-5  mt-72">
       <img
-        src={'public\google.png'}
+        src={'./public/google.png'}
         alt="Google Icon"
         height={100}
         width={100}
