@@ -32,13 +32,15 @@ function PostManager() {
     .collection("posts")
     .doc(slug);
 
-    const [post] = useDocumentDataOnce(postRef);
-
+  const [post] = useDocumentDataOnce(postRef);
 
   return (
     <main className={styles.container}>
+
+      
       {post && (
         <>
+
           <section>
             <h1>{post.title}</h1>
             <p>ID: {post.slug}</p>
@@ -71,7 +73,13 @@ function PostManager() {
 }
 //testing
 function PostForm({ defaultValues, postRef, preview }) {
-  const { register, handleSubmit, formState:{errors}, reset, watch } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+    watch,
+  } = useForm({
     defaultValues,
     mode: "onChange",
   });
@@ -79,6 +87,7 @@ function PostForm({ defaultValues, postRef, preview }) {
   // const { isValid, isDirty } = formState;
 
   const updatePost = async ({ content, published }) => {
+ 
     await postRef.update({
       content,
       published,
@@ -99,8 +108,6 @@ function PostForm({ defaultValues, postRef, preview }) {
       )}
 
       <div className={preview ? styles.hidden : styles.controls}>
-     
-
         <textarea
           className=" shadow-lg rounded-md "
           name="content"
@@ -120,21 +127,13 @@ function PostForm({ defaultValues, postRef, preview }) {
             className={styles.checkbox}
             name="published"
             type="checkbox"
-            {...register}
+            {...register("published", {
+              required: true,
+             
+            })}
           />
           <label>Published</label>
         </fieldset>
-
-
-
-
-
-
-
-
-
-
-
 
         <button
           type="submit"

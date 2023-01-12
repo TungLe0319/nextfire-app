@@ -37,8 +37,8 @@ function PostList() {
 
   return (
     <>
-      {/* <h1>Manage your Posts</h1> */}
-      {/* <PostFeed posts={posts} admin={true} /> */}
+      <h1>Manage your Posts</h1>
+      <PostFeed posts={posts} admin={true} />
     </>
   );
 }
@@ -52,6 +52,7 @@ function CreateNewPost() {
   const slug = encodeURI(kebabCase(title));
 
 
+
   // Validate length
   const isValid = title.length > 3 && title.length < 100;
   const buttonValid = isValid
@@ -62,27 +63,12 @@ function CreateNewPost() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   // Create a new post in firestore
   const createPost = async (e) => {
     e.preventDefault();
     // @ts-ignore
     const uid = auth.currentUser.uid;
+     const photoURL = auth.currentUser.photoURL;
     const ref = firestore
       .collection("users")
       .doc(uid)
@@ -95,10 +81,11 @@ function CreateNewPost() {
       slug,
       uid,
       username,
-      published: true,
+      published: false,
       content: "# hello world!",
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp(),
+      photoURL,
       heartCount: 0,
     };
 

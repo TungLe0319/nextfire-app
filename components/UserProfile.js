@@ -4,7 +4,7 @@ import React from "react";
 export default function UserProfile({ user }) {
   return (
     <div className="box-center">
-      <Image src={user.photoURL} className="card-img-center" alt="user Image" />
+      <img src={user.photoURL} className="card-img-center" alt="user Image" />
       <p>
         <i> @{user.username}</i>
       </p>

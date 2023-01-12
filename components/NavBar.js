@@ -2,17 +2,51 @@ import { auth } from "@lib/firebase.js";
 import Image from "next/image.js";
 import Link from "next/link.js";
 import { useRouter } from "next/router.js";
-import React, { useContext,useState } from "react";
+import React, { useContext,useEffect,useState } from "react";
 import { UserContext } from "../lib/context.js";
 
 export default function Navbar() {
+
+
+
+ const [translateY, setTranslateY] = useState(0);
+
+ useEffect(() => {
+   function handleScroll() {
+     if (window.scrollY > 70) {
+       setTranslateY(-70);
+     } else {
+       setTranslateY(0);
+     }
+   }
+   window.addEventListener("scroll", handleScroll);
+   return () => {
+     window.removeEventListener("scroll", handleScroll);
+   };
+ }, []);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   // @ts-ignore
   const { user, username } = useContext(UserContext)
  
   const router = useRouter()
  const signOut = () => {
    auth.signOut();
-   router.reload();
+   router.push('/');
  };
   const handleImageError = () => {
     setImgUrl(
@@ -21,7 +55,10 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="navbar">
+    <nav
+      className="navbar  transition-transform "
+      style={{ transform: `translateY(${translateY}px)` }}
+    >
       <ul>
         <li>
           <Link href="/">
@@ -41,8 +78,6 @@ export default function Navbar() {
                   Write Posts
                 </button>
               </Link>
-
-
             </li>
             <li className="">
               <Link
@@ -50,7 +85,7 @@ export default function Navbar() {
                 className="flex align-middle  text-center"
               >
                 <div className="">
-                  {/* <img
+                  <img
                     src={
                       // @ts-ignore
                       user?.photoURL
@@ -59,9 +94,9 @@ export default function Navbar() {
                     width="80"
                     height="80"
                     onError={handleImageError}
-                  /> */}
+                  />
                 </div>
-                <p className="mb-0 mt-3 ml-2">@{user?.displayName}</p>
+                <p className="mb-0 mt-3 ml-2">{user?.displayName}</p>
               </Link>
             </li>
           </>

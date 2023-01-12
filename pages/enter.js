@@ -34,7 +34,7 @@ function SignInButton() {
 
   return (
     <div className="  flex justify-center ounded  p-5  mt-72">
-      <Image
+      <img
         src={"https://cdn-icons-png.flaticon.com/512/300/300221.png"}
         alt="Google Icon"
         height={100}
@@ -58,9 +58,9 @@ function UsernameForm() {
   const [isValid, setIsValid] = useState(false);
   const [loading, setLoading] = useState(false);
   const { user, username } = useContext(UserContext);
-  // useEffect(() => {
-  //   checkUsername(formValue);
-  // }, [formValue]);
+  useEffect(() => {
+    checkUsername(formValue);
+  }, [formValue]);
 
   const onChange = (e) => {
     // Force form value typed in form to match correct format
@@ -81,18 +81,18 @@ function UsernameForm() {
     }
   };
 
-  // const checkUsername = useCallback(
-  //   debounce(async (username) => {
-  //     if (username.length >= 3) {
-  //       const ref = firestore.doc(`usernames/${username}`);
-  //       const { exists } = await ref.get();
-  //       console.log("Firestore read executed");
-  //       setIsValid(!exists);
-  //       setLoading(false);
-  //     }
-  //   }, 500),
-  //   []
-  // );
+  const checkUsername = useCallback(
+    debounce(async (username) => {
+      if (username.length >= 3) {
+        const ref = firestore.doc(`usernames/${username}`);
+        const { exists } = await ref.get();
+        console.log("Firestore read executed");
+        setIsValid(!exists);
+        setLoading(false);
+      }
+    }, 500),
+    []
+  );
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -118,24 +118,25 @@ function UsernameForm() {
 
   return (
     !username && (
-      <section>
-        <h3>Choose Username</h3>
-        <form onSubmit={onSubmit}>
+      <section className=" bg-black text-white p-5 rounded-xl shadow-xl" >
+        <h3 className="  text-3xl ">Choose A Username</h3>
+        <form onSubmit={onSubmit} className="my-5">
           <input
             name="username"
             placeholder="username"
             value={formValue}
             onChange={onChange}
+            className="rounded-xl shadow-xl text-black"
           />
           <UsernameMessage
             username={formValue}
             isValid={isValid}
             loading={loading}
           />
-          <button type="submit" className="btn-green" disabled={!isValid}>
+          <button type="submit" className="btn-green mt-5" disabled={!isValid}>
             Choose
           </button>
-
+{/* 
           <h3>Debug State</h3>
           <div>
             Username: {formValue}
@@ -143,7 +144,7 @@ function UsernameForm() {
             Loading: {loading.toString()}
             <br />
             Username Valid : {isValid.toString()}
-          </div>
+          </div> */}
         </form>
       </section>
     )

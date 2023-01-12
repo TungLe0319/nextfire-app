@@ -10,16 +10,22 @@ export default function PostContent({ post }) {
       : post.createdAt.toDate();
 
   return (
-    <div className="card">
-      <h1>{post?.title}</h1>
-      <span className="text-sm">
-        Written by{" "}
-        <Link href={`/${post.username}/`}>
-          <p className="text-info">@{post.username}</p>
-        </Link>{" "}
-        on {createdAt.toISOString()}
-      </span>
-      <ReactMarkdown>{post?.content}</ReactMarkdown>
+    <div class="">
+      <div class=" text-red-600 font-bold text-sm mb-3">
+        {post?.published == false? 'This Post Is Not Published ': ''}
+      </div>
+      <div className="bg-white p-5 rounded-xl shadow-lg  ">
+        <span className="text-sm ">
+          <h1 className="text-center  ">{post?.title}</h1>
+          <Link href={`/${post.username}/`}>
+            <p className="text-info">@{post.username}</p>
+          </Link>
+          {createdAt.toLocaleString()}
+        </span>
+        <div className="mt-5">
+          <ReactMarkdown>{post?.content}</ReactMarkdown>
+        </div>
+      </div>
     </div>
   );
 }
