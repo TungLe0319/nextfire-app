@@ -219,7 +219,8 @@ input[type="file"] {
 }
 
 .upload-snippet {
-  width: 75%;
+  text-align: start;
+
     margin-left: auto;
     background: white;
     padding: 5px;
@@ -252,6 +253,7 @@ input[type="file"] {
 
 .box {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
 }
 
