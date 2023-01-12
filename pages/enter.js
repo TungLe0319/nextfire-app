@@ -2,6 +2,7 @@ import debounce from "lodash.debounce";
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { UserContext } from "../lib/context.js";
 import { auth, firestore, googleAuthProvider } from "../lib/firebase.js";
+import Image from "next/image.js";
 import '@styles/Admin.module.css'
 // @ts-ignore
 // @ts-ignore
@@ -32,13 +33,13 @@ function SignInButton() {
 
   return (
     <div className="  flex justify-center ounded  p-5  mt-72">
-      {/* <Image
+      <Image
         src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png"
         alt=""
         height={100}
         width={100}
         className="shadow-xl rounded-full"
-      /> */}
+      />
       <button className="btn-google ml-4 shadow-lg" onClick={signInWithGoogle}>
         Sign in with google
       </button>
