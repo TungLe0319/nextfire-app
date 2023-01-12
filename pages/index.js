@@ -73,6 +73,12 @@ export default function Home(props) {
           Sign up for an 👨‍🎤 account, ✍️ write posts, then 💞 heart content
           created by other users. All public content is server-rendered and
           search-engine optimized.
+          <br />
+          <b>
+          
+            I did this following fireship.io's instructional video until
+            completion and then put my own flare on this project.
+          </b>
         </p>
       </div>
 

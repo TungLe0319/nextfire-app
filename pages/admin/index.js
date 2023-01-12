@@ -1,4 +1,3 @@
-
 import AuthCheck from "../../components/AuthCheck";
 import PostFeed from "../../components/PostFeed";
 import { UserContext } from "../../lib/context";
@@ -38,8 +37,8 @@ function PostList() {
 
   return (
     <>
-      <h1>Manage your Posts</h1>
-      <PostFeed posts={posts} admin={true} />
+      {/* <h1>Manage your Posts</h1> */}
+      {/* <PostFeed posts={posts} admin={true} /> */}
     </>
   );
 }
@@ -52,8 +51,32 @@ function CreateNewPost() {
   // Ensure slug is URL safe
   const slug = encodeURI(kebabCase(title));
 
+
   // Validate length
   const isValid = title.length > 3 && title.length < 100;
+  const buttonValid = isValid
+    ? "btn-green transition-all"
+    : "btn-red transition-all ";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   // Create a new post in firestore
   const createPost = async (e) => {
@@ -72,7 +95,7 @@ function CreateNewPost() {
       slug,
       uid,
       username,
-      published: false,
+      published: true,
       content: "# hello world!",
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp(),
@@ -92,13 +115,13 @@ function CreateNewPost() {
       <input
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        placeholder="My Awesome Article!"
-        className=""
+        placeholder="Title For Next Amazing Article"
+        className="shadow-md rounded-md"
       />
-      <p>
+      <p className="mt-2">
         <strong>Slug:</strong> {slug}
       </p>
-      <button type="submit" disabled={!isValid} className="btn-green">
+      <button type="submit" disabled={!isValid} className={buttonValid}>
         Create New Post
       </button>
     </form>

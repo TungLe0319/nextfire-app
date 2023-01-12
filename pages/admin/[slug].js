@@ -31,10 +31,13 @@ function PostManager() {
     .doc(auth.currentUser.uid)
     .collection("posts")
     .doc(slug);
-  const [post] = useDocumentDataOnce(postRef);
+
+    const [post] = useDocumentDataOnce(postRef);
+
 
   return (
     <main className={styles.container}>
+    
       {post && (
         <>
           <section>
@@ -65,12 +68,12 @@ function PostManager() {
 }
 
 function PostForm({ defaultValues, postRef, preview }) {
-  const { register, errors, handleSubmit, formState, reset, watch } = useForm({
+  const { register, handleSubmit, formState:{errors}, reset, watch } = useForm({
     defaultValues,
     mode: "onChange",
   });
 
-  const { isValid, isDirty } = formState;
+  // const { isValid, isDirty } = formState;
 
   const updatePost = async ({ content, published }) => {
     await postRef.update({
@@ -96,11 +99,12 @@ function PostForm({ defaultValues, postRef, preview }) {
         <ImageUploader />
 
         <textarea
+          className=" shadow-lg rounded-md "
           name="content"
-          ref={register({
-            maxLength: { value: 20000, message: "content is too long" },
-            minLength: { value: 10, message: "content is too short" },
-            required: { value: true, message: "content is required" },
+          {...register("content", {
+            required: true,
+            maxLength: 20000,
+            minLength: 10,
           })}
         ></textarea>
 
@@ -113,7 +117,7 @@ function PostForm({ defaultValues, postRef, preview }) {
             className={styles.checkbox}
             name="published"
             type="checkbox"
-            ref={register}
+            {...register}
           />
           <label>Published</label>
         </fieldset>
@@ -121,7 +125,7 @@ function PostForm({ defaultValues, postRef, preview }) {
         <button
           type="submit"
           className="btn-green"
-          disabled={!isDirty || !isValid}
+          // disabled={!isDirty || !isValid}
         >
           Save Changes
         </button>
