@@ -75,8 +75,7 @@ export default function Home(props) {
           search-engine optimized.
           <br />
           <b>
-          
-            I did this following fireship.io's instructional video until
+            I did this following fireship.io instructional video until
             completion and then put my own flare on this project.
           </b>
         </p>
