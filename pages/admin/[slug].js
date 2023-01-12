@@ -37,7 +37,6 @@ function PostManager() {
 
   return (
     <main className={styles.container}>
-    
       {post && (
         <>
           <section>
@@ -60,13 +59,17 @@ function PostManager() {
               <button className="btn-blue">Live view</button>
             </Link>
             <DeletePostButton postRef={postRef} />
+
+            <div className="">
+              <ImageUploader />
+            </div>
           </aside>
         </>
       )}
     </main>
   );
 }
-
+//testing
 function PostForm({ defaultValues, postRef, preview }) {
   const { register, handleSubmit, formState:{errors}, reset, watch } = useForm({
     defaultValues,
@@ -96,7 +99,7 @@ function PostForm({ defaultValues, postRef, preview }) {
       )}
 
       <div className={preview ? styles.hidden : styles.controls}>
-        <ImageUploader />
+     
 
         <textarea
           className=" shadow-lg rounded-md "
@@ -121,6 +124,17 @@ function PostForm({ defaultValues, postRef, preview }) {
           />
           <label>Published</label>
         </fieldset>
+
+
+
+
+
+
+
+
+
+
+
 
         <button
           type="submit"
