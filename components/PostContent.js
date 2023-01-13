@@ -10,8 +10,8 @@ export default function PostContent({ post }) {
       : post.createdAt.toDate();
 
   return (
-    <div class="">
-      <div class=" text-red-600 font-bold text-sm mb-3">
+    <div className="">
+      <div className=" text-red-600 font-bold text-sm mb-3">
         {post?.published == false? 'This Post Is Not Published ': ''}
       </div>
       <div className="bg-white p-5 rounded-xl shadow-lg  ">

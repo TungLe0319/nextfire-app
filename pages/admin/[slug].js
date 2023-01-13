@@ -53,7 +53,7 @@ function PostManager() {
           </section>
 
           <aside>
-            <h3>Tools</h3>
+            <h3 className=" font-semibold ">Tools</h3>
             <button onClick={() => setPreview(!preview)}>
               {preview ? "Edit" : "Preview"}
             </button>

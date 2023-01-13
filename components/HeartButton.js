@@ -4,7 +4,7 @@ import { useDocument } from "react-firebase-hooks/firestore";
 // Allows user to heart or like a post
 export default function Heart({ postRef }) {
   // Listen to heart document for currently logged in user
-  // console.log(postRef);
+
   const heartRef = postRef.collection("hearts").doc(auth.currentUser.uid);
 console.log(heartRef);
   const [heartDoc] = useDocument(heartRef);
@@ -13,6 +13,9 @@ console.log([heartDoc]);
   const addHeart = async () => {
     const uid = auth.currentUser.uid;
     const batch = firestore.batch();
+
+
+
 
     batch.update(postRef, { heartCount: increment(1) });
     batch.set(heartRef, { uid });
@@ -30,7 +33,7 @@ console.log([heartDoc]);
     await batch.commit();
   };
 
-  return heartDoc?.exists? (
+  return heartDoc?.exists === true ? (
     <button onClick={removeHeart}>💔 Unheart</button>
   ) : (
     <button onClick={addHeart}>💗 Heart</button>

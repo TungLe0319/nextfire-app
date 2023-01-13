@@ -2,52 +2,34 @@ import { auth } from "@lib/firebase.js";
 import Image from "next/image.js";
 import Link from "next/link.js";
 import { useRouter } from "next/router.js";
-import React, { useContext,useEffect,useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../lib/context.js";
 
 export default function Navbar() {
+  const [translateY, setTranslateY] = useState(0);
 
-
-
- const [translateY, setTranslateY] = useState(0);
-
- useEffect(() => {
-   function handleScroll() {
-     if (window.scrollY > 70) {
-       setTranslateY(-70);
-     } else {
-       setTranslateY(0);
-     }
-   }
-   window.addEventListener("scroll", handleScroll);
-   return () => {
-     window.removeEventListener("scroll", handleScroll);
-   };
- }, []);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  useEffect(() => {
+    function handleScroll() {
+      if (window.scrollY > 70) {
+        setTranslateY(-70);
+      } else {
+        setTranslateY(0);
+      }
+    }
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   // @ts-ignore
-  const { user, username } = useContext(UserContext)
- 
-  const router = useRouter()
- const signOut = () => {
-   auth.signOut();
-   router.push('/');
- };
+  const { user, username } = useContext(UserContext);
+
+  const router = useRouter();
+  const signOut = () => {
+    auth.signOut();
+    router.push("/");
+  };
   const handleImageError = () => {
     setImgUrl(
       "https://bestprofilepictures.com/wp-content/uploads/2020/06/Anonymous-Profile-Picture.jpg"
@@ -56,26 +38,27 @@ export default function Navbar() {
 
   return (
     <nav
-      className="navbar  transition-transform "
+      className="navbar  transition-transform   "
       style={{ transform: `translateY(${translateY}px)` }}
     >
-      <ul>
+      <ul className="">
         <li>
           <Link href="/">
-            <button className="btn-logo">FEED</button>
+            <button className="btn-logo p-2 px-3">Growth</button>
           </Link>
         </li>
+       
         {username && (
           <>
             <li className="push-left">
-              <button onClick={signOut} className="bg-transparent">
+              <button onClick={signOut} className="btn-danger p-2">
                 Sign Out
               </button>
             </li>
             <li className="">
               <Link href="/admin">
-                <button className=" transition-colors bg-transparent   hover:transition-colors">
-                  Write Posts
+                <button className=" p-2 btn-blue transition-colors    hover:transition-colors">
+                  Create Post
                 </button>
               </Link>
             </li>
@@ -96,7 +79,6 @@ export default function Navbar() {
                     onError={handleImageError}
                   />
                 </div>
-                <p className="mb-0 mt-3 ml-2">{user?.displayName}</p>
               </Link>
             </li>
           </>
@@ -114,8 +96,6 @@ export default function Navbar() {
   );
 }
 
-
-
 export function Modal() {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -127,7 +107,6 @@ export function Modal() {
     setIsOpen(false);
   };
 
-  
   return (
     <div>
       <button onClick={openModal}>Open Modal</button>
